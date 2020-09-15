@@ -54,7 +54,7 @@ const SignUp: React.FC = () => {
           description: 'Você já pode fazer seu logo no GoBarber!',
         });
 
-        history.push('/');
+        history.push('/dashboard');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
