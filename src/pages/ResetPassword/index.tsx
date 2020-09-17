@@ -58,7 +58,7 @@ const SignIn: React.FC = () => {
           token,
         });
 
-        history.push('/signin');
+        history.push('/');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
