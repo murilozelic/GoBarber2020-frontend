@@ -4,31 +4,41 @@ import { FiPower } from 'react-icons/fi';
 import { Container, Header, HeaderContent, Profile } from './styles';
 
 import logoImg from '../../assets/logo.svg';
+import { useAuth } from '../../hooks/auth';
 
-const Dashboard: React.FC = () => (
-  <Container>
-    <Header>
-      <HeaderContent>
-        <img src={logoImg} alt="GoBarber" />
+const Dashboard: React.FC = () => {
+  const { signOut, user } = useAuth();
 
-        <Profile>
-          <img
-            src="https://media-exp1.licdn.com/dms/image/C4E03AQGGMMULDjzndg/profile-displayphoto-shrink_200_200/0?e=1605744000&v=beta&t=hiiF94g2pw_kFMHnwJjRll6TTrOxaKxgBbtcWaZW9j8"
-            alt="Imagem de perfil"
-          />
+  console.log(user);
 
-          <div>
-            <span>Bem-vindo</span>
-            <strong>Murilo Zelic</strong>
-          </div>
-        </Profile>
+  return (
+    <Container>
+      <Header>
+        <HeaderContent>
+          <img src={logoImg} alt="GoBarber" />
 
-        <button type="button">
-          <FiPower />
-        </button>
-      </HeaderContent>
-    </Header>
-  </Container>
-);
+          <Profile>
+            <img
+              src={
+                user.avatar_url ||
+                'https://api.adorable.io/avatars/285/abott@adorable.png'
+              }
+              alt={user.name}
+            />
+
+            <div>
+              <span>Bem-vindo</span>
+              <strong>{user.name}</strong>
+            </div>
+          </Profile>
+
+          <button type="button" onClick={signOut}>
+            <FiPower />
+          </button>
+        </HeaderContent>
+      </Header>
+    </Container>
+  );
+};
 
 export default Dashboard;
